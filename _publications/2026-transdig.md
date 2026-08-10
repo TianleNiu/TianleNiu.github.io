@@ -1,6 +1,7 @@
 ---
 title: "A deep learning framework for pharmaceutical bioactivity prediction"
 collection: publications
+category: manuscripts
 permalink: /publication/2024-transdig
 date: 2024-01-01
 venue: "Nucleic Acids Research"
