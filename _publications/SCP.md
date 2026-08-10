@@ -4,7 +4,7 @@ collection: publications
 category: manuscripts
 permalink: /publication/2026-SCP
 date: 2026-01-01
-venue: "Nature Protocols"
+venue: "***Nature Protocols***"
 paperurl: ""
 citation: "Tianle Niu et al. Nature Protocols, 2026."
 ---
