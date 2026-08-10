@@ -3,7 +3,7 @@ title: "Unveiling the bioactive landscape of drug inactive ingredients (DIGs) us
 collection: publications
 category: manuscripts
 permalink: /publication/2026-transdig
-date: 2024-01-01
+date: 2026-01-01
 venue: "Acta Pharmaceutica Sinica B"
 paperurl: ""
 citation: "Tianle Niu et al. Acta Pharmaceutica Sinica B, 2026."
