@@ -55,9 +55,4 @@ Developing deep learning models for compound-protein interaction prediction and 
 Developing web-based computational tools for molecular property and pharmacokinetic prediction.
 
 
-## Contact
 
-Email: your_email@example.com
-
-GitHub:
-https://github.com/TianleNiu
