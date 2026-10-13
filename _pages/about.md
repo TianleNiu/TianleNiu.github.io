@@ -35,7 +35,7 @@ I am particularly interested in integrating:
 
 ## Education
 
-**Xi'an Jiaotong University**
+**Xi'an Jiaotong University**<br>
 Ph.D. Student in Biology
 
 **Zhejiang University**  
