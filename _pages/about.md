@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am Tianle Niu, a Master's student at Zhejiang University.
+I am Tianle Niu, a Ph.D. student in Biology at the FIST, Xi'an Jiaotong University.
 
 My research focuses on artificial intelligence-assisted drug discovery and computational pharmacology.
 
@@ -34,6 +34,9 @@ I am particularly interested in integrating:
 
 
 ## Education
+
+**Xi'an Jiaotong University**
+Ph.D. Student in Biology
 
 **Zhejiang University**  
 Master Student in Pharmaceutical Sciences
