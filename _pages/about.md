@@ -7,8 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am Tianle Niu, a Ph.D. student in Biology at the FIST, Xi'an Jiaotong University.
-
+I am Tianle Niu, a Ph.D. student in Biology at the FIST.
 My research focuses on artificial intelligence-assisted drug discovery and computational pharmacology.
 
 My current research interests include:
