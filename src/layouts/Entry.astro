@@ -1,0 +1,20 @@
+---
+import Shell from './Shell.astro';
+interface Props {
+  section: 'works' | 'news';
+  data: { title: string; summary: string; date: string; label: string; sample: boolean; cover?: string; alt?: string };
+}
+const { section, data } = Astro.props;
+---
+<Shell title={`${data.title} — nstudio.`} description={data.summary}>
+  <article class="wrap detail">
+    <a class="jump" href={`/#${section}`}>← Back to {section}</a>
+    <header>
+      <p class="meta">{data.label} / <time datetime={data.date}>{data.date}</time>{data.sample && ' / Sample content'}</p>
+      <h1>{data.title}</h1>
+      <p class="lede">{data.summary}</p>
+    </header>
+    {data.cover && <div class="cover"><img src={data.cover} alt={data.alt ?? ''} width="960" height="540" /></div>}
+    <div class="article-body"><slot /></div>
+  </article>
+</Shell>

@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { sections, logo } from '../lib/site';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" sizes="64x64" href="/branding/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="wrap mast">
+      <a class="brand" href="/" aria-label="nstudio home"><img src={logo} alt="" /> nstudio<span>.</span></a>
+      <nav aria-label="Main navigation">
+        {sections.map(({ id, name }) => <a href={`/#${id}`}>{name}</a>)}
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="wrap footer flex flex-wrap items-center justify-between gap-4">
+      <a class="brand" href="/">nstudio<span>.</span></a>
+      <p class="meta">Independent AI for Science Research Studio</p>
+      <a class="meta jump" href="#main">Back to top ↑</a>
+    </footer>
+  </body>
+</html>

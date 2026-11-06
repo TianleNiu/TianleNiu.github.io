@@ -1,0 +1,91 @@
+---
+import { logo } from '../lib/site';
+const rings = [
+  { rx: 360, ry: 87, tilt: -17, duration: 19, delay: -2 },
+  { rx: 315, ry: 126, tilt: 16, duration: 27, delay: -8 },
+  { rx: 271, ry: 108, tilt: -37, duration: 23, delay: -14 },
+];
+---
+<section class="wrap hero" aria-labelledby="hero-heading">
+  <div class="hero-copy">
+    <p class="meta eyebrow"><span class="signal"></span> Independent research studio</p>
+    <h1 id="hero-heading">Exploring intelligence.<br />Advancing Biology<span>.</span></h1>
+    <div class="hero-intro">
+      <p>At the intersection of artificial intelligence, molecular science, and discovery.</p>
+      <!--<a href="#works" class="jump">Explore the work <span aria-hidden="true">↓</span></a>-->
+    </div>
+  </div>
+  <figure class="orbit" data-orbit>
+    <svg viewBox="0 0 840 450" aria-hidden="true">
+      <g class="guides"><path d="M0 225H840M420 0V450"/><circle cx="420" cy="225" r="176"/><circle cx="420" cy="225" r="202"/></g>
+      {rings.map(({ rx, ry, tilt, duration, delay }) => (
+        <g transform={`translate(420 225) rotate(${tilt})`}>
+          <ellipse rx={rx} ry={ry} fill="none" stroke="currentColor" />
+          <circle class="particle" cx={rx} r="5" data-rx={rx} data-ry={ry} data-duration={duration} data-delay={delay} />
+        </g>
+      ))}
+    </svg>
+    <img src={logo} alt="nstudio N logo" width="1692" height="820" fetchpriority="high" />
+    <figcaption class="meta plate"><span>NEURAL / NEW / NIU</span><span>nstudio. / AI4S</span></figcaption>
+    <button hidden class="motion meta" type="button">Pause orbit</button>
+  </figure>
+</section>
+<script>
+  const orbit = document.querySelector<HTMLElement>('[data-orbit]');
+  const button = orbit?.querySelector<HTMLButtonElement>('button');
+  const particles = Array.from(orbit?.querySelectorAll<SVGCircleElement>('.particle') ?? [], (node) => ({
+    node,
+    rx: Number(node.dataset.rx),
+    ry: Number(node.dataset.ry),
+    duration: Number(node.dataset.duration),
+    delay: Number(node.dataset.delay),
+  }));
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  if (orbit && button) {
+    let frame = 0;
+    let elapsed = 0;
+    let start = 0;
+    let visible = false;
+    let paused = false;
+
+    const paint = (time: number) => {
+      for (const { node, rx, ry, duration, delay } of particles) {
+        const angle = (time / 1000 + delay) * 2 * Math.PI / duration;
+        node.setAttribute('cx', String(rx * Math.cos(angle)));
+        node.setAttribute('cy', String(ry * Math.sin(angle)));
+      }
+    };
+    const tick = (now: number) => {
+      paint(elapsed + now - start);
+      frame = requestAnimationFrame(tick);
+    };
+    const sync = () => {
+      // button.hidden = preference.matches;这个是让按钮显示的
+      button.hidden = true;
+      const shouldPlay = visible && !document.hidden && !paused && !preference.matches;
+      if (shouldPlay && !frame) {
+        start = performance.now();
+        frame = requestAnimationFrame(tick);
+      } else if (!shouldPlay && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        elapsed += performance.now() - start;
+        paint(elapsed);
+      }
+    };
+
+    paint(0);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(orbit);
+    button.addEventListener('click', () => {
+      paused = !paused;
+      button.textContent = paused ? 'Play orbit' : 'Pause orbit';
+      sync();
+    });
+    preference.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    sync();
+  }
+</script>

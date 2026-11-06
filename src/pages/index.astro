@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Shell from '../layouts/Shell.astro';
+import Hero from '../components/Hero.astro';
+import { newestFirst } from '../lib/site';
+
+const works = newestFirst(await getCollection('works'));
+const news = newestFirst(await getCollection('news'));
+const areas = [
+  { name: 'AI for biology', text: 'Learning from the structure, interactions, and behavior of molecules.', glyph: '∿' },
+  { name: 'Drug discovery', text: 'Connecting generative models with constraints that matter in scientific practice.', glyph: '⬡' },
+  { name: 'Clinical AI', text: 'Designing benchmarks around generalization, uncertainty, and reproducibility.', glyph: '✚' },
+];
+---
+<Shell title="nstudio. — Independent AI for Science Research Studio" description="An independent AI for Science research studio founded by Tianle Niu.">
+  <Hero />
+
+  <section id="works" class="wrap chapter" aria-labelledby="works-title">
+    <div class="chapter-head"><p class="meta"><span>01</span> / Portfolio</p><h2 id="works-title">Latest Works</h2></div>
+    <div class="work-grid">
+      {works.map(({ id, data }) => (
+        <article>
+          <a class="work-link" href={`/works/${id}/`}>
+            <div class="cover"><img src={data.cover} alt={data.alt} loading="lazy" width="960" height="540" /></div>
+            <div class="work-info">
+              <p class="meta">{data.label}{data.sample && ' / Illustrative project'}</p>
+              <h3>{data.title}</h3>
+              <p>{data.summary}</p>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="research" class="wrap chapter" aria-labelledby="research-title">
+    <div class="chapter-head"><p class="meta"><span>02</span> / Inquiry</p><h2 id="research-title">Research Area</h2></div>
+    <div class="area-grid">
+      {areas.map(({ name, text, glyph }, index) => (
+        <article class="area">
+          <p class="meta">FIELD / 0{index + 1}</p>
+          <div class="glyph" aria-hidden="true">{glyph}</div>
+          <h3>{name}</h3><p>{text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="news" class="wrap chapter" aria-labelledby="news-title">
+    <div class="chapter-head"><p class="meta"><span>03</span> / Dispatches</p><h2 id="news-title">Latest News</h2></div>
+    <ul class="news-list">
+      {news.map(({ id, data }) => (
+        <li><a href={`/news/${id}/`}>
+          <time class="meta" datetime={data.date}>{data.date}</time>
+          <span>{data.title}</span>
+          <span class="meta news-tag">{data.sample ? 'Sample update' : data.label}</span>
+          <span aria-hidden="true">↗</span>
+        </a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="about" class="wrap chapter about" aria-labelledby="about-title">
+    <div class="chapter-head"><p class="meta"><span>04</span> / Studio</p><h2 id="about-title">About</h2></div>
+    <div class="about-body">
+      <p class="about-statement">A small, independent studio exploring how AI can help accelerate science.</p>
+      <div><p class="meta">Founder</p><h3>Tianle Niu</h3><a class="jump" href="https://github.com/TianleNiu">GitHub</a></div>
+    </div>
+  </section>
+</Shell>
